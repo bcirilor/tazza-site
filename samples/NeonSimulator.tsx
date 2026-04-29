@@ -32,9 +32,15 @@ export default function NeonSimulator() {
       stroke-linecap: round;
       stroke-linejoin: round;
       filter: url(#${filterId});
-      transition: filter 0.45s ease;
+      transition: filter 0.45s ease, stroke 0.45s ease;
     }
     .neon-svg-paths .fil1 { fill: none; }
+    @media (max-width: 768px) {
+      .neon-svg-paths path, .neon-svg-paths line {
+        stroke: ${col.glow};
+        filter: drop-shadow(0 0 6px ${col.glow}) drop-shadow(0 0 22px ${col.glow}80);
+      }
+    }
   `
 
   return (
