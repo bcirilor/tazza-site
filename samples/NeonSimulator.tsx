@@ -3,12 +3,14 @@
 import { useState } from 'react'
 
 const NEON_COLORS: Record<string, { glow: string; swatch: string; bg: string }> = {
-  Rosa:            { glow: '#ff2d9b', swatch: '#ff2d9b', bg: 'rgba(255,45,155,0.9)' },
-  Azul:            { glow: '#00c3ff', swatch: '#00c3ff', bg: 'rgba(0,195,255,0.9)' },
-  'Branco Frio':   { glow: '#9fd4ff', swatch: '#ddeeff', bg: 'rgba(200,230,255,0.95)' },
   'Branco Quente': { glow: '#ffcc55', swatch: '#fff3c0', bg: 'rgba(255,220,100,0.95)' },
-  Amarelo:         { glow: '#ffe84a', swatch: '#ffe84a', bg: 'rgba(255,232,74,0.9)' },
+  'Branco Frio':   { glow: '#9fd4ff', swatch: '#ddeeff', bg: 'rgba(200,230,255,0.95)' },
+  Azul:            { glow: '#00c3ff', swatch: '#00c3ff', bg: 'rgba(0,195,255,0.9)' },
+  Ciano:           { glow: '#00ffe0', swatch: '#00ffe0', bg: 'rgba(0,255,224,0.9)' },
+  Laranja:         { glow: '#ff7a00', swatch: '#ff7a00', bg: 'rgba(255,122,0,0.9)' },
   Vermelho:        { glow: '#ff2244', swatch: '#ff2244', bg: 'rgba(255,34,68,0.9)' },
+  Amarelo:         { glow: '#ffe84a', swatch: '#ffe84a', bg: 'rgba(255,232,74,0.9)' },
+  Rosa:            { glow: '#ff2d9b', swatch: '#ff2d9b', bg: 'rgba(255,45,155,0.9)' },
 }
 
 export default function NeonSimulator() {
