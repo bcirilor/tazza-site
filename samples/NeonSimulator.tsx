@@ -2,6 +2,12 @@
 
 import { useState } from 'react'
 
+declare global {
+  interface Window {
+    gtag_report_conversion?: (url?: string) => boolean
+  }
+}
+
 const NEON_COLORS: Record<string, { glow: string; swatch: string; bg: string }> = {
   'Branco Quente': { glow: '#ffcc55', swatch: '#fff3c0', bg: 'rgba(255,220,100,0.95)' },
   'Branco Frio':   { glow: '#9fd4ff', swatch: '#ddeeff', bg: 'rgba(200,230,255,0.95)' },
@@ -178,10 +184,15 @@ export default function NeonSimulator() {
         <button
           className="btn-neon-cta"
           style={{ background: col.bg, ['--cta-glow' as string]: col.glow + '88' }}
-          onClick={() => window.open(
-            `https://wa.me/5545999367000?text=Ol%C3%A1!%20Quero%20um%20LED%20Neon%20cor%20${encodeURIComponent(activeColor)}.%20Quero%20um%20or%C3%A7amento!`,
-            '_blank'
-          )}
+          onClick={() => {
+            if (typeof window !== 'undefined' && window.gtag_report_conversion) {
+              window.gtag_report_conversion()
+            }
+            window.open(
+              `https://wa.me/5545999367000?text=${encodeURIComponent('Olá! Estava testando as cores no site e gostaria de um orçamento para um LED Neon.')}`,
+              '_blank'
+            )
+          }}
         >
           Pedir esse neon no WhatsApp →
         </button>
