@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
   }
 
   const body = await req.json()
-  const { name, product, _hp } = body
+  const { name, product, phone, _hp } = body
 
   // Honeypot — bots preenchem, humanos não
   if (_hp) return NextResponse.json({ ok: true })
@@ -32,13 +32,28 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Produto inválido.' }, { status: 400 })
   }
 
+  // Telefone é opcional; aceita só E.164 BR (+55 + 10/11 dígitos)
+  const cleanPhone =
+    typeof phone === 'string' && /^\+55\d{10,11}$/.test(phone) ? phone : null
+
   const supabase = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.SUPABASE_SERVICE_ROLE_KEY!,
     { auth: { autoRefreshToken: false, persistSession: false } }
   )
 
-  await supabase.from('leads').insert([{ name: trimName, product }])
+  // Insert com phone; se a coluna `phone` ainda não existir, refaz sem ela
+  // para nunca perder o lead.
+  if (cleanPhone) {
+    const { error } = await supabase
+      .from('leads')
+      .insert([{ name: trimName, product, phone: cleanPhone }])
+    if (error) {
+      await supabase.from('leads').insert([{ name: trimName, product }])
+    }
+  } else {
+    await supabase.from('leads').insert([{ name: trimName, product }])
+  }
 
   return NextResponse.json({ ok: true })
 }

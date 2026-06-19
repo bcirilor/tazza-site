@@ -4,7 +4,7 @@ import { useState } from 'react'
 
 declare global {
   interface Window {
-    gtag_report_conversion?: (url?: string) => boolean
+    gtag_report_conversion?: (url?: string, userData?: { phone_number: string }) => boolean
   }
 }
 
