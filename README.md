@@ -5,9 +5,11 @@ lettering, decals and printing). Real application, in production. The goal is no
 inform: it is to turn a visit into a WhatsApp conversation with the lead already
 qualified.
 
-> **This repository is an excerpt.** The full application is private. What is here is
-> `samples/`, four files that carry the decisions described below, plus the commits
-> that produced them. It does not build or run on its own.
+> **This repository is an excerpt, and the samples are illustrative.** The full
+> application is private. The files under `samples/` were rewritten for publication:
+> field names, the product list and the persistence layer are deliberately different
+> from production, and the rate limiter is shown in the durable form rather than the
+> one the site runs. They read as code and do not build or run on their own.
 
 **Stack:** Next.js (App Router), React, TypeScript, Tailwind CSS, Supabase, Vercel.
 
